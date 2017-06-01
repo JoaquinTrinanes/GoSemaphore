@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"sync"
 	"time"
 
@@ -21,16 +22,18 @@ var buffer [bufferSize]int
 func productor() {
 	defer wg.Done()
 
+	//create 20 elements
 	for i := 0; i < 20; i++ {
 		freeSlots.Down()
 		mutex.Down()
 		buffer[count] = i
 		count++
-		fmt.Printf("Producido %d en posición %d\n", i, count)
+		fmt.Printf("Produced %d at %d\n", i, count)
 
 		mutex.Up()
 		fullSlots.Up()
-		time.Sleep(time.Second)
+		//sleep between 0 and 4 seconds
+		time.Sleep(time.Duration(rand.Intn(4)) * time.Second)
 	}
 }
 
@@ -42,16 +45,16 @@ func consumer() {
 		mutex.Down()
 
 		count--
-		fmt.Printf("Consumido %d en posición %d\n", buffer[count], count)
+		fmt.Printf("Consumed %d at %d\n", buffer[count], count)
 
 		mutex.Up()
 		freeSlots.Up()
-		time.Sleep(time.Second * 3)
-
+		time.Sleep(time.Duration(rand.Intn(4)) * time.Second)
 	}
 }
 
 func main() {
+	rand.Seed(time.Now().UnixNano())
 
 	wg.Add(2) //we'll be waiting for two goroutines to finish
 
@@ -61,5 +64,5 @@ func main() {
 
 	go productor()
 	go consumer()
-	wg.Wait()
+	wg.Wait() //wait for both goroutines to finish
 }
