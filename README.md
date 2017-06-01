@@ -56,4 +56,4 @@ Now, you can perform the following methods on the semaphore:
 
 ## Credits
 
-This small library was made all by myself in one day, in order to practice Go and with the hope of it being helpful. You may use it as you want, and i'll be happy to know where (and if) it's used :)
+This small library was made all by myself in one day, in order to practice Go and with the hope of it being helpful. You may use it as you want, and I'll be happy to know where (and if) it's used  :)
