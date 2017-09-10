@@ -62,10 +62,11 @@ func (s *Semaphore) TryDown() bool {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 
-	if s.n == 0 {
-		return false
+	if s.n > 0 {
+		s.n--
+		return true
 	}
-	return true
+	return false
 }
 
 //Value returns the semaphore current value.
