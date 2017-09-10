@@ -26,7 +26,7 @@ Once imported, you'll be set.
 To create a semaphore, simply create a `*Semaphore` type variable:
 
 ```
-var s Semaphore
+var s *Semaphore
 ```
 
 This will create a semaphore with 0 value. If you want to initialize it at any other value, use the `SemInit` function, which will return a pointer to a semaphore:
@@ -54,7 +54,7 @@ Now, you can perform the following methods on the semaphore:
 
  - `TryDown()` will attempt to decrement the semaphore value. If the operation was a success it will return true. Otherwise, it won't do anything and return false. Note that the goroutine won't block under any circunstances when calling this method.
 
-A bit more complex use of the library can be seen at the [*Producer-consumer problem* solution](example/prodCons.go), in which we use semaphores, even as a mutex (although I don't reccomend it, since the semaphore itself uses a mutex and it's redundant).
+A bit more complex use of the library can be seen at the [*Producer-consumer problem* solution](example/prodCons.go), in which we use semaphores, even as a mutex (although It is not recommended, as the semaphore's struct includes a mutex as well).
 
 ## Credits
 
