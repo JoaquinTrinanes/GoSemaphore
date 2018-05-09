@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/JoaquinTrinanes/semaphore"
+	"github.com/JoaquinTrinanes/GoSemaphore"
 )
 
 var freeSlots, fullSlots, mutex *semaphore.Semaphore
